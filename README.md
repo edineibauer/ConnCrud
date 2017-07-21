@@ -1,6 +1,8 @@
 # ConnCrud
 operações CRUD no banco
 
+teste
+
 REQUER um arquivo com os dados de conexão definidos, segue modelo abaixo.
 REQUER PHP 7.0.10 ou superior
 
