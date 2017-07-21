@@ -1,0 +1,8 @@
+{
+  "name": "ConnBanco",
+  "description": "Conexão ao banco de  dados para operações CRUD",
+  "version": "1.0",
+  "require": {
+    "php": "^7.0.10"
+  }
+}
