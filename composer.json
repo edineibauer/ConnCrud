@@ -1,7 +1,12 @@
 {
-  "name": "ConnCrud",
+  "name": "Conn/ConnCrud",
   "description": "Conexão ao banco de  dados para operações CRUD",
-  "version": "1.0",
+  "authors": [
+    {
+      "name": "Edinei J. Bauer",
+      "email": "edineibauer@gmail.com"
+    }
+  ],
   "require": {
     "php": "^7.0.10"
   }
