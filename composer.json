@@ -1,5 +1,5 @@
 {
-  "name": "Conn/ConnCrud",
+  "name": "conn/conn-crud",
   "description": "Conexão ao banco de  dados para operações CRUD",
   "authors": [
     {

@@ -7,11 +7,10 @@
  * @copyright (c) 2017, Edinei J. Bauer
  */
 
-namespace Conn;
+namespace conn;
 
 class InfoTable extends Conn
 {
-
     private $select;
     private $places;
     private $result;

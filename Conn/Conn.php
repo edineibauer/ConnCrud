@@ -8,11 +8,10 @@
  * @copyright (c) 2017, Edinei J. Bauer
  */
 
-namespace Conn;
+namespace conn;
 
 abstract class Conn
 {
-
     private static $host = HOST ?? null;
     private static $user = USER ?? null;
     private static $pass = PASS ?? null;

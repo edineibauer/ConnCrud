@@ -7,11 +7,10 @@
  * @copyright (c) 2017, Edinei J. Bauer
  */
 
-namespace Conn;
+namespace conn;
 
 class Create extends Conn
 {
-
     private $tabela;
     private $dados;
     private $result;
