@@ -1,6 +1,7 @@
 {
   "name": "conn/conn-crud",
   "description": "Conexão ao banco de  dados para operações CRUD",
+  "version": "1.0",
   "authors": [
     {
       "name": "Edinei J. Bauer",
