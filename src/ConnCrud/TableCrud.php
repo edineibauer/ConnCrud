@@ -111,7 +111,6 @@ class TableCrud
             endforeach;
         else:
             $this->readColumns();
-            $this->id = 0;
             $this->{$attr} = $value;
         endif;
     }
@@ -140,7 +139,6 @@ class TableCrud
         elseif ($arr):
 
             $this->readColumns();
-            $this->id = 0;
             foreach ($arr as $key => $value):
                 $this->{$key} = $value;
             endforeach;
@@ -166,10 +164,16 @@ class TableCrud
                 endforeach;
             endif;
         endif;
+
+        $this->id = 0;
     }
 
     private function getColunas()
     {
+        if(!$this->colunas):
+            $this->readColumns();
+        endif;
+
         return $this->colunas;
     }
 
