@@ -111,5 +111,4 @@ class Read extends Conn
             parent::error("<b>Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}", $e->getCode());
         }
     }
-
 }
