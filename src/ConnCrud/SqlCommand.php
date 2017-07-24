@@ -91,11 +91,10 @@ class SqlCommand extends Conn
         try {
             $this->getSyntax();
             $this->command->execute();
-            $this->result = $this->command->fetchAll();
 
         } catch (\PDOException $e) {
-            $this->result = null;
-            parent::error("<b>Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}", $e->getCode());
+            $this->result = "<b>Erro ao Executar Comando: </b> {$e->getMessage()}";
+            parent::error("<b>Erro ao Executar Comando</b> {$e->getMessage()}", $e->getCode());
         }
     }
 }
