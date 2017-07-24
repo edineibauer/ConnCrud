@@ -11,6 +11,7 @@ namespace ConnCrud;
 
 class Read extends Conn
 {
+    private $teste;
     private $select;
     private $places;
     private $result;

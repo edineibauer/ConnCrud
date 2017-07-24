@@ -109,5 +109,4 @@ class Update extends Conn
             parent::error("<b>(Update) Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}", $e->getCode());
         }
     }
-
 }
