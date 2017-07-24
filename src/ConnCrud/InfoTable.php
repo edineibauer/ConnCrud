@@ -84,7 +84,7 @@ class InfoTable extends Conn
     {
         $this->conn = parent::getConn();
         $this->read = $this->conn->prepare($this->select);
-        $this->read->setFetchMode(PDO::FETCH_ASSOC);
+        $this->read->setFetchMode(\PDO::FETCH_ASSOC);
     }
 
     //Cria a sintaxe da query para Prepared Statements
@@ -95,7 +95,7 @@ class InfoTable extends Conn
                 if ($Vinculo == 'limit' || $Vinculo == 'offset'):
                     $Valor = (int)$Valor;
                 endif;
-                $this->read->bindValue(":{$Vinculo}", $Valor, (is_int($Valor) ? PDO::PARAM_INT : PDO::PARAM_STR));
+                $this->read->bindValue(":{$Vinculo}", $Valor, (is_int($Valor) ? \PDO::PARAM_INT : \PDO::PARAM_STR));
             endforeach;
         endif;
     }
@@ -108,7 +108,7 @@ class InfoTable extends Conn
             $this->getSyntax();
             $this->read->execute();
             $this->result = $this->read->fetchAll();
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->result = null;
             parent::error("<b>Erro ao Ler:</b> {$e->getMessage()}", $e->getCode());
         }

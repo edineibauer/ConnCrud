@@ -104,7 +104,7 @@ class Update extends Conn
         try {
             $this->update->execute(array_merge($this->dados, $this->places));
             $this->result = true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->result = null;
             parent::error("<b>(Update) Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}", $e->getCode());
         }

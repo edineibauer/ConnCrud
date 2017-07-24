@@ -74,7 +74,7 @@ class Create extends Conn
         try {
             $this->create->execute($this->dados);
             $this->result = $this->conn->lastInsertId();
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->result = null;
             parent::error("<b>Erro ao cadastrar: ({$this->tabela})</b> {$e->getMessage()}", $e->getCode());
         }

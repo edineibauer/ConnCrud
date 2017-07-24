@@ -68,7 +68,7 @@ class SqlCommand extends Conn
     {
         $this->conn = parent::getConn();
         $this->command = $this->conn->prepare($this->select);
-        $this->command->setFetchMode(PDO::FETCH_ASSOC);
+        $this->command->setFetchMode(\PDO::FETCH_ASSOC);
     }
 
     //Cria a sintaxe da query para Prepared Statements
@@ -79,7 +79,7 @@ class SqlCommand extends Conn
                 if ($Vinculo == 'limit' || $Vinculo == 'offset'):
                     $Valor = (int)$Valor;
                 endif;
-                $this->command->bindValue(":{$Vinculo}", $Valor, (is_int($Valor) ? PDO::PARAM_INT : PDO::PARAM_STR));
+                $this->command->bindValue(":{$Vinculo}", $Valor, (is_int($Valor) ? \PDO::PARAM_INT : \PDO::PARAM_STR));
             endforeach;
         endif;
     }
@@ -93,7 +93,7 @@ class SqlCommand extends Conn
             $this->command->execute();
             $this->result = $this->command->fetchAll();
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->result = null;
             parent::error("<b>Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}", $e->getCode());
         }

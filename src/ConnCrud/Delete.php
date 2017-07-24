@@ -74,7 +74,7 @@ class Delete extends Conn
         try {
             $this->delete->execute($this->places);
             $this->result = true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $this->result = null;
             parent::error("<b>Erro ao Deletar:</b> {$e->getMessage()}", $e->getCode());
         }
