@@ -110,7 +110,7 @@ class TableCrud
                 $this->{$key} = $value;
             endforeach;
         else:
-            $this->readColumns();
+            $this->readNewTableColumns();
             $this->{$attr} = $value;
         endif;
     }
@@ -138,7 +138,7 @@ class TableCrud
 
         elseif ($arr):
 
-            $this->readColumns();
+            $this->readNewTableColumns();
             foreach ($arr as $key => $value):
                 $this->{$key} = $value;
             endforeach;
@@ -152,7 +152,7 @@ class TableCrud
         endforeach;
     }
 
-    private function readColumns()
+    private function readNewTableColumns()
     {
         if (!$this->colunas):
             $db = DATABASE;
@@ -171,7 +171,7 @@ class TableCrud
     private function getColunas()
     {
         if(!$this->colunas):
-            $this->readColumns();
+            $this->readNewTableColumns();
         endif;
 
         return $this->colunas;
