@@ -85,7 +85,12 @@ class TableCrud {
         endif;
     }
 
-    public function load($attr, $value) {
+    public function load($attr, $value = null) {
+        $attrTemp = $value ? $attr : "id";
+        $value = $value ? $value : $attr;
+        $attr = $attrTemp;
+        unset($attrTemp);
+
         $read = new Read();
         $read->ExeRead($this->table, "WHERE {$attr} = '" . str_replace("'", "''", $value) . "'");
         if ($read->getResult()):
