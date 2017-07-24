@@ -109,9 +109,7 @@ class TableCrud
                 $this->colunas[] = $key;
                 $this->{$key} = $value;
             endforeach;
-
         else:
-
             $this->read();
             $this->id = 0;
             $this->{$attr} = $value;
@@ -161,7 +159,7 @@ class TableCrud
         if (!$this->colunas):
             $db = DATABASE;
             $read = new InfoTable();
-            $read->ExeRead("COLUMNS", "WHERE TABLE_SCHEMA = :nb && TABLE_NAME = :nt", "nb={$db}&nt={$this->table}");
+            $read->exeRead("COLUMNS", "WHERE TABLE_SCHEMA = :nb && TABLE_NAME = :nt", "nb={$db}&nt={$this->table}");
             if ($read->getResult()):
                 foreach ($read->getResult() as $gg):
                     $this->colunas[] = $gg['COLUMN_NAME'];
