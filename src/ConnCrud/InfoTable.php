@@ -113,5 +113,4 @@ class InfoTable extends Conn
             parent::error("<b>Erro ao Ler:</b> {$e->getMessage()}", $e->getCode());
         }
     }
-
 }

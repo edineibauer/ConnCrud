@@ -79,5 +79,4 @@ class Create extends Conn
             parent::error("<b>Erro ao cadastrar: ({$this->tabela})</b> {$e->getMessage()}", $e->getCode());
         }
     }
-
 }

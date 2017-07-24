@@ -79,5 +79,4 @@ class Delete extends Conn
             parent::error("<b>Erro ao Deletar:</b> {$e->getMessage()}", $e->getCode());
         }
     }
-
 }
