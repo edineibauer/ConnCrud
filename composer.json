@@ -1,8 +1,6 @@
 {
   "name": "conn/conn-crud",
   "description": "Conexão ao banco de  dados para operações CRUD",
-  "version": "1.0",
-  "license": "MIT",
   "authors": [
     {
       "name": "Edinei J. Bauer",
@@ -10,6 +8,6 @@
     }
   ],
   "require": {
-    "php": "^7.0.10"
+    "php": "^7.0"
   }
 }
