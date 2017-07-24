@@ -25,6 +25,7 @@ abstract class Conn
      */
     public static function setDatabase(string $database)
     {
+        self::$connect = null;
         self::$database = $database;
     }
 

@@ -29,7 +29,7 @@ class TableCrud
 
     public function __construct($table)
     {
-        if (define('PRE')):
+        if (defined('PRE')):
             $this->table = (preg_match('/^' . PRE . '/', $table) ? $table : PRE . $table);
         endif;
     }
@@ -110,7 +110,7 @@ class TableCrud
                 $this->{$key} = $value;
             endforeach;
         else:
-            $this->read();
+            $this->readColumns();
             $this->id = 0;
             $this->{$attr} = $value;
         endif;
@@ -139,7 +139,7 @@ class TableCrud
 
         elseif ($arr):
 
-            $this->read();
+            $this->readColumns();
             $this->id = 0;
             foreach ($arr as $key => $value):
                 $this->{$key} = $value;
@@ -154,7 +154,7 @@ class TableCrud
         endforeach;
     }
 
-    private function read()
+    private function readColumns()
     {
         if (!$this->colunas):
             $db = DATABASE;
