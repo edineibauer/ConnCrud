@@ -112,5 +112,7 @@ class InfoTable extends Conn
             $this->result = null;
             parent::error("<b>Erro ao Ler:</b> {$e->getMessage()}", $e->getCode());
         }
+
+        parent::setDatabase(DATABASE);
     }
 }
