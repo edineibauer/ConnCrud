@@ -144,7 +144,7 @@ class TableCrud {
 
     private function read() {
         if (!$this->colunas):
-            $db = DBSA;
+            $db = DATABASE;
             $read = new InfoTable();
             $read->ExeRead("COLUMNS", "WHERE TABLE_SCHEMA = :nb && TABLE_NAME = :nt", "nb={$db}&nt={$this->table}");
             if ($read->getResult()):

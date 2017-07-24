@@ -102,7 +102,7 @@ class ForeignKey extends ForeignKeyMiddle {
 
     private function getPk($table) {
 
-        $db = DBSA;
+        $db = DATABASE;
         $readI = new InfoTable();
         $readI->ExeRead("COLUMNS", "WHERE TABLE_SCHEMA = :nb && TABLE_NAME = :nt", "nb={$db}&nt={$table}");
         if ($readI->getResult()):
@@ -188,7 +188,7 @@ class ForeignKey extends ForeignKeyMiddle {
     }
 
     private function acceptThisFluxo($table, $column) {
-        $db = DBSA;
+        $db = DATABASE;
         $readI = new InfoTable();
         $readI->ExeRead("COLUMNS", "WHERE TABLE_SCHEMA = :nb && TABLE_NAME = :nt", "nb={$db}&nt={$table}");
         if ($readI->getResult()):
