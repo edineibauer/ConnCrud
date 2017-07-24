@@ -21,33 +21,41 @@ use ConnCrud\Update;
 use ConnCrud\Delete;
 use ConnCrud\InfoTable;
 
-class TableCrud {
+class TableCrud
+{
     private $table;
     private $colunas;
     private $_data;
 
-    public function __construct($table) {
-        $this->table = $table;
+    public function __construct($table)
+    {
+        if (define('PRE')):
+            $this->table = (preg_match('/^' . PRE . '/', $table) ? $table : PRE . $table);
+        endif;
     }
 
-    public function __set($property, $value) {
+    public function __set($property, $value)
+    {
         if (is_array($this->getColunas()) && in_array($property, $this->getColunas())):
-            $value = (is_float($value) ? (float)$value : ($value == "0" || (is_numeric($value) && !preg_match('/^0\d+/i', $value)) ? (int)$value : (empty($value)? NULL : (string)$value)));
+            $value = (is_float($value) ? (float)$value : ($value == "0" || (is_numeric($value) && !preg_match('/^0\d+/i', $value)) ? (int)$value : (empty($value) ? NULL : (string)$value)));
             $this->_data[$property] = $value;
         endif;
     }
 
-    public function __get($property) {
+    public function __get($property)
+    {
         if (is_array($this->getColunas()) && in_array($property, $this->getColunas())):
             return array_key_exists($property, $this->_data) ? $this->_data[$property] : null;
         endif;
     }
 
-    public function exist() {
+    public function exist()
+    {
         return isset($this->_data['id']) && $this->_data['id'] > 0;
     }
 
-    public function getDados() {
+    public function getDados()
+    {
         $dados = array();
         if ($this->_data):
             foreach ($this->_data as $key => $value):
@@ -58,7 +66,8 @@ class TableCrud {
         return $dados;
     }
 
-    public function save() {
+    public function save()
+    {
         $dados = $this->getDados();
 
         if (isset($dados['id']) && !empty($dados['id']) && $dados['id'] > 0):
@@ -73,7 +82,8 @@ class TableCrud {
         endif;
     }
 
-    public function delete() {
+    public function delete()
+    {
         $dados = $this->getDados();
 
         if (isset($dados['id']) && !empty($dados['id'])):
@@ -85,7 +95,8 @@ class TableCrud {
         endif;
     }
 
-    public function load($attr, $value = null) {
+    public function load($attr, $value = null)
+    {
         $attrTemp = $value ? $attr : "id";
         $value = $value ? $value : $attr;
         $attr = $attrTemp;
@@ -107,7 +118,8 @@ class TableCrud {
         endif;
     }
 
-    public function loadArray($array) {
+    public function loadArray($array)
+    {
         $attr = "";
 
         foreach ($array as $k => $v):
@@ -117,7 +129,8 @@ class TableCrud {
         $this->loadSql($attr, $array);
     }
 
-    public function loadSql($sql, $arr = null) {
+    public function loadSql($sql, $arr = null)
+    {
         $read = new Read();
         $read->ExeRead($this->table, "WHERE {$sql}");
         if ($read->getResult()):
@@ -136,13 +149,15 @@ class TableCrud {
         endif;
     }
 
-    public function setDados($dados) {
+    public function setDados($dados)
+    {
         foreach ($dados as $key => $value):
             $this->{$key} = $value;
         endforeach;
     }
 
-    private function read() {
+    private function read()
+    {
         if (!$this->colunas):
             $db = DATABASE;
             $read = new InfoTable();
@@ -155,7 +170,8 @@ class TableCrud {
         endif;
     }
 
-    private function getColunas() {
+    private function getColunas()
+    {
         return $this->colunas;
     }
 

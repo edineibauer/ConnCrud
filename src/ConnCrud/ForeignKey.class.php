@@ -17,7 +17,8 @@ namespace ConnCrud;
 
 use ConnCrud\InfoTable;
 
-class ForeignKey extends ForeignKeyMiddle {
+class ForeignKey extends ForeignKeyMiddle
+{
 
     private $db = DATABASE ?? null;
     private $table;
@@ -30,7 +31,8 @@ class ForeignKey extends ForeignKeyMiddle {
     /**
      * @param mixed $table
      */
-    public function setTable($table) {
+    public function setTable($table)
+    {
         $this->table = $table;
         $this->getForeignKey();
     }
@@ -38,28 +40,32 @@ class ForeignKey extends ForeignKeyMiddle {
     /**
      * @param mixed $column
      */
-    public function setColumn($column) {
+    public function setColumn($column)
+    {
         $this->column = $column;
     }
 
     /**
      * @return mixed
      */
-    public function getOneToOne() {
+    public function getOneToOne()
+    {
         return $this->oneToOne;
     }
 
     /**
      * @return mixed
      */
-    public function getOneToMany() {
+    public function getOneToMany()
+    {
         return $this->oneToMany;
     }
 
     /**
      * @return mixed
      */
-    public function getManyToOne() {
+    public function getManyToOne()
+    {
         return $this->manyToOne;
     }
 
@@ -74,11 +80,13 @@ class ForeignKey extends ForeignKeyMiddle {
     /**
      * @return mixed
      */
-    public function getManyToMany() {
+    public function getManyToMany()
+    {
         return $this->manyToMany;
     }
 
-    private function getForeignKey() {
+    private function getForeignKey()
+    {
         if ($this->column && $this->table):
             $this->findOneToOneColumn();
 
@@ -89,7 +97,8 @@ class ForeignKey extends ForeignKeyMiddle {
         endif;
     }
 
-    private function findOneToOneColumn() {
+    private function findOneToOneColumn()
+    {
         $readI = new InfoTable();
         $readI->ExeRead("KEY_COLUMN_USAGE", "WHERE TABLE_SCHEMA = :nb && REFERENCED_TABLE_SCHEMA = :nb && TABLE_NAME =:tn && COLUMN_NAME = :tb", "nb={$this->db}&tn={$this->table}&tb={$this->column}");
         if ($readI->getResult()):
@@ -100,7 +109,8 @@ class ForeignKey extends ForeignKeyMiddle {
         endif;
     }
 
-    private function getPk($table) {
+    private function getPk($table)
+    {
 
         $db = DATABASE;
         $readI = new InfoTable();
@@ -116,7 +126,8 @@ class ForeignKey extends ForeignKeyMiddle {
         return false;
     }
 
-    private function findOneToOne() {
+    private function findOneToOne()
+    {
         $readI = new InfoTable();
         $readI->ExeRead("KEY_COLUMN_USAGE", "WHERE TABLE_SCHEMA = :nb && REFERENCED_TABLE_SCHEMA = :nb && REFERENCED_TABLE_NAME != '" . PRE . "user' && TABLE_NAME = :tb", "nb={$this->db}&tb={$this->table}");
         if ($readI->getResult()):
@@ -136,14 +147,16 @@ class ForeignKey extends ForeignKeyMiddle {
         endif;
     }
 
-    private function findManyToOne($result, $g) {
+    private function findManyToOne($result, $g)
+    {
         if ($result && $result[0]['DELETE_RULE'] === "CASCADE" && $this->acceptThisFluxo($g['TABLE_NAME'], $g['COLUMN_NAME'])):
             $this->manyToOne[][$g['COLUMN_NAME']] = $g['REFERENCED_TABLE_NAME'];
             parent::setColumnTable($this->table, $g['COLUMN_NAME'], $g['REFERENCED_TABLE_NAME']);
         endif;
     }
 
-    private function findOneToMany() {
+    private function findOneToMany()
+    {
         $readI = new InfoTable();
         $readI->ExeRead("KEY_COLUMN_USAGE", "WHERE TABLE_SCHEMA = :nb && REFERENCED_TABLE_SCHEMA = :nb && TABLE_NAME != '" . PRE . "user' && REFERENCED_TABLE_NAME = :tb", "nb={$this->db}&tb={$this->table}");
         if ($readI->getResult()):
@@ -159,7 +172,8 @@ class ForeignKey extends ForeignKeyMiddle {
         endif;
     }
 
-    private function findManyToMany() {
+    private function findManyToMany()
+    {
         $readI = new InfoTable();
         $readI->ExeRead("KEY_COLUMN_USAGE", "WHERE TABLE_SCHEMA = :nb && REFERENCED_TABLE_SCHEMA = :nb && REFERENCED_TABLE_NAME = :tb && TABLE_NAME != :tb", "nb={$this->db}&tb={$this->table}");
         if ($readI->getResult()):
@@ -169,7 +183,8 @@ class ForeignKey extends ForeignKeyMiddle {
         endif;
     }
 
-    private function getRelationTableManyToMany($table, $column) {
+    private function getRelationTableManyToMany($table, $column)
+    {
         if (!$this->getPk($table) && $this->acceptThisFluxo($table, $column)):
             $readI = new InfoTable();
             $readI->ExeRead("KEY_COLUMN_USAGE", "WHERE TABLE_SCHEMA = :nb && REFERENCED_TABLE_SCHEMA = :nb && TABLE_NAME = :tn", "nb={$this->db}&tn={$table}");
@@ -187,7 +202,8 @@ class ForeignKey extends ForeignKeyMiddle {
         endif;
     }
 
-    private function acceptThisFluxo($table, $column) {
+    private function acceptThisFluxo($table, $column)
+    {
         $db = DATABASE;
         $readI = new InfoTable();
         $readI->ExeRead("COLUMNS", "WHERE TABLE_SCHEMA = :nb && TABLE_NAME = :nt", "nb={$db}&nt={$table}");
