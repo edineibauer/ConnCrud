@@ -8,7 +8,7 @@
  * @copyright (c) 2017, Edinei J. Bauer
  */
 
-namespace Conn\Crud;
+namespace ConnCrud;
 
 abstract class Conn
 {

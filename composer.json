@@ -3,6 +3,7 @@
   "description": "Conexão ao banco de  dados para operações CRUD",
   "type": "library",
   "license": "MIT",
+  "minimum-stability": "dev-master",
   "authors": [
     {
       "name": "Edinei J. Bauer",
@@ -11,6 +12,11 @@
   ],
   "require": {
     "php": "^7.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "ConnCrud": "src/"
+    }
   }
 }
 
