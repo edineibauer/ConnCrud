@@ -21,7 +21,7 @@ use ConnCrud\Update;
 use ConnCrud\Delete;
 use ConnCrud\InfoTable;
 
-class Banco {
+class TableCrud {
     private $table;
     private $colunas;
     private $_data;
