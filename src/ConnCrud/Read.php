@@ -11,6 +11,7 @@ namespace ConnCrud;
 
 class Read extends Conn
 {
+    private $teste;
     private $select;
     private $places;
     private $result;
@@ -111,4 +112,5 @@ class Read extends Conn
             parent::error("<b>Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}", $e->getCode());
         }
     }
+
 }
