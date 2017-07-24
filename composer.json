@@ -1,6 +1,8 @@
 {
   "name": "conn/conn-crud",
   "description": "Conexão ao banco de  dados para operações CRUD",
+  "type": "library",
+  "license": "MIT",
   "authors": [
     {
       "name": "Edinei J. Bauer",
@@ -12,7 +14,7 @@
   },
   "autoload": {
     "psr-0": {
-      "": "src/"
+      "Conn": "lib/"
     }
   }
 }
