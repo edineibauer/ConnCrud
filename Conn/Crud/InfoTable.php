@@ -7,7 +7,7 @@
  * @copyright (c) 2017, Edinei J. Bauer
  */
 
-namespace conn;
+namespace Conn\Crud;
 
 class InfoTable extends Conn
 {
