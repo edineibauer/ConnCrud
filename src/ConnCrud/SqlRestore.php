@@ -50,7 +50,6 @@ class SqlRestore
 
     private function restore($filename)
     {
-        echo $filename;
         $progressFilename = $filename . '_filepointer'; // tmp file for progress
         ($fp = fopen($filename, 'r')) OR die('failed to open file:' . $filename);
 
