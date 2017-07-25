@@ -71,6 +71,7 @@ class SqlRestore
                 if (preg_match('/^(ALTER |CREATE |INSERT )/i', $query)) {
                     $sql->exeCommand($query);
                     if ($sql->getResult()) {
+                        unlink($progressFilename);
                         die('<div style="width:100%;float:left;clear: both;">Erro ao executar o comando \'<strong>' . $query . '</strong></div>');
                     }
                 }
