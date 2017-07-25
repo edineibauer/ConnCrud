@@ -15,17 +15,43 @@ namespace ConnCrud;
 
 use ConnCrud\SqlCommand;
 
-class RestoreSql
+class SqlRestore
 {
+
+    private $maxRuntime;
 
     /**
      * $filename = caminho do arquivo sql para importar
-    */
-    public function __construct($filename, $maxRuntime = 30)
+     */
+    public function __construct($filename = null, $maxRuntime = 30)
     {
-        $deadline = time() + $maxRuntime;
-        $progressFilename = $filename . '_filepointer'; // tmp file for progress
+        $this->maxRuntime = $maxRuntime + time();
 
+        if ($filename) {
+
+            $this->restore($filename);
+
+        } else {
+
+            $this->folderSql("sql/up");
+
+            if ($handle = opendir('sql/up')) {
+                while ($entry = readdir($handle)) {
+                    if (strtolower(pathinfo($entry, PATHINFO_EXTENSION)) === "sql") {
+                        $this->restore("sql/up/{$entry}");
+                    }
+
+                }
+                closedir($handle);
+            }
+
+        }
+    }
+
+    private function restore($filename)
+    {
+        echo $filename;
+        $progressFilename = $filename . '_filepointer'; // tmp file for progress
         ($fp = fopen($filename, 'r')) OR die('failed to open file:' . $filename);
 
         if (file_exists($progressFilename)) {
@@ -36,7 +62,7 @@ class RestoreSql
         $queryCount = 0;
         $query = '';
         $sql = new SqlCommand();
-        while ($deadline > time() AND ($line = fgets($fp, 1024000))) {
+        while ($this->maxRuntime > time() AND ($line = fgets($fp, 1024000))) {
             if (substr($line, 0, 2) == '--' OR trim($line) == '') {
                 continue;
             }
@@ -65,4 +91,22 @@ class RestoreSql
         }
     }
 
+    private function createFolder($Folder)
+    {
+        if (!file_exists($Folder) && !is_dir($Folder)):
+            mkdir($Folder, 0755);
+        endif;
+    }
+
+    private function folderSql($folder)
+    {
+        if (preg_match('/\//i', $folder)) {
+            foreach (explode('/', $folder) as $fold) {
+                $this->createFolder($fold);
+            }
+        } else {
+            $this->createFolder($folder);
+        }
+        return "{$folder}";
+    }
 }
