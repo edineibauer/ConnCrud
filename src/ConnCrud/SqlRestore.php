@@ -101,8 +101,10 @@ class SqlRestore
     private function folderSql($folder)
     {
         if (preg_match('/\//i', $folder)) {
+            $folderTmp = "";
             foreach (explode('/', $folder) as $fold) {
-                $this->createFolder($fold);
+                $folderTmp = (empty($folderTmp) ? "" : $folderTmp . "/") . $fold;
+                $this->createFolder($folderTmp);
             }
         } else {
             $this->createFolder($folder);
