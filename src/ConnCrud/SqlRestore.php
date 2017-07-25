@@ -69,6 +69,7 @@ class SqlRestore
             $query .= $line;
             if (substr(trim($query), -1) == ';') {
                 if (preg_match('/^(ALTER |CREATE |INSERT )/i', $query)) {
+                    $query = str_replace(array('CREATE TABLE ', 'CREATE TABLE IF NOT EXISTS IF NOT EXISTS '), array('CREATE TABLE IF NOT EXISTS ', 'CREATE TABLE IF NOT EXISTS '), $query);
                     $sql->exeCommand($query);
                     if ($sql->getResult()) {
                         unlink($progressFilename);
