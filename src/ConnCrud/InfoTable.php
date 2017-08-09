@@ -35,7 +35,6 @@ class InfoTable extends Conn
      */
     public function exeRead($tabela, $termos = null, $parseString = null)
     {
-        $tabela = $this->setTabela($tabela);
         if (!empty($parseString)):
             parse_str($parseString, $this->places);
         endif;
@@ -80,15 +79,6 @@ class InfoTable extends Conn
      * *********** PRIVATE METHODS ************
      * ****************************************
      */
-
-    private function setTabela($tabela)
-    {
-        if (defined('PRE')):
-            return (preg_match('/^' . PRE . '/', $tabela) ? $tabela : PRE . $tabela);
-        endif;
-
-        return $tabela;
-    }
 
     //Obtém o PDO e Prepara a query
     private function connect()
