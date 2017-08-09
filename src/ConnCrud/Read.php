@@ -25,18 +25,18 @@ class Read extends Conn
     /**
      * <b>Exe Read:</b> Executa uma leitura simplificada com Prepared Statments. Basta informar o nome da tabela,
      * os termos da seleção e uma analize em cadeia (ParseString) para executar.
-     * @param STRING $Tabela = Nome da tabela
-     * @param STRING $Termos = WHERE | ORDER | LIMIT :limit | OFFSET :offset
-     * @param STRING $ParseString = link={$link}&link2={$link2}
+     * @param STRING $tabela = Nome da tabela
+     * @param STRING $termos = WHERE | ORDER | LIMIT :limit | OFFSET :offset
+     * @param STRING $parseString = link={$link}&link2={$link2}
      */
-    public function exeRead($Tabela, $Termos = null, $ParseString = null)
+    public function exeRead($tabela, $termos = null, $parseString = null)
     {
-        $this->tabela = $Tabela;
-        if (!empty($ParseString)):
-            parse_str($ParseString, $this->places);
+        $this->setTabela($tabela);
+        if (!empty($parseString)):
+            parse_str($parseString, $this->places);
         endif;
 
-        $this->select = "SELECT * FROM {$Tabela} {$Termos}";
+        $this->select = "SELECT * FROM {$tabela} {$termos}";
         $this->execute();
     }
 
@@ -76,6 +76,16 @@ class Read extends Conn
      * *********** PRIVATE METHODS ************
      * ****************************************
      */
+
+    private function setTabela($tabela)
+    {
+        if (defined('PRE')):
+            $this->tabela = (preg_match('/^' . PRE . '/', $tabela) ? $tabela : PRE . $tabela);
+        else:
+            $this->tabela = $tabela;
+        endif;
+    }
+
     //Obtém o PDO e Prepara a query
     private function connect()
     {

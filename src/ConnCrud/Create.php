@@ -26,13 +26,13 @@ class Create extends Conn
      * <b>ExeCreate:</b> Executa um cadastro simplificado no banco de dados utilizando prepared statements.
      * Basta informar o nome da tabela e um array atribuitivo com nome da coluna e valor!
      *
-     * @param STRING $Tabela = Informe o nome da tabela no banco!
-     * @param ARRAY $Dados = Informe um array atribuitivo. ( Nome Da Coluna => Valor ).
+     * @param STRING $tabela = Informe o nome da tabela no banco!
+     * @param ARRAY $dados = Informe um array atribuitivo. ( Nome Da Coluna => Valor ).
      */
-    public function exeCreate($Tabela, array $Dados)
+    public function exeCreate($tabela, array $dados)
     {
-        $this->tabela = (string)$Tabela;
-        $this->dados = $Dados;
+        $this->setTabela($tabela);
+        $this->dados = $dados;
 
         $this->getSyntax();
         $this->execute();
@@ -52,6 +52,16 @@ class Create extends Conn
      * *********** PRIVATE METHODS ************
      * ****************************************
      */
+
+    private function setTabela($tabela)
+    {
+        if (defined('PRE')):
+            $this->tabela = (preg_match('/^' . PRE . '/', $tabela) ? $tabela : PRE . $tabela);
+        else:
+            $this->tabela = $tabela;
+        endif;
+    }
+
     //Obtém o PDO e Prepara a query
     private function connect()
     {

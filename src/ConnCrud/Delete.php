@@ -22,12 +22,12 @@ class Delete extends Conn
     /** @var PDO */
     private $conn;
 
-    public function exeDelete($Tabela, $Termos, $ParseString)
+    public function exeDelete($tabela, $termos, $parseString)
     {
-        $this->tabela = (string)$Tabela;
-        $this->termos = (string)$Termos;
+        $this->setTabela($tabela);
+        $this->termos = (string)$termos;
 
-        parse_str($ParseString, $this->places);
+        parse_str($parseString, $this->places);
         $this->getSyntax();
         $this->execute();
     }
@@ -54,6 +54,16 @@ class Delete extends Conn
      * *********** PRIVATE METHODS ************
      * ****************************************
      */
+
+    private function setTabela($tabela)
+    {
+        if (defined('PRE')):
+            $this->tabela = (preg_match('/^' . PRE . '/', $tabela) ? $tabela : PRE . $tabela);
+        else:
+            $this->tabela = $tabela;
+        endif;
+    }
+
     //Obtém o PDO e Prepara a query
     private function Connect()
     {
