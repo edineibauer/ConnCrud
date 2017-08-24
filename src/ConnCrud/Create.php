@@ -15,12 +15,21 @@ class Create extends Conn
     private $tabela;
     private $dados;
     private $result;
+    private $erro;
 
     /** @var PDOStatement */
     private $create;
 
     /** @var PDO */
     private $conn;
+
+    /**
+     * @return mixed
+     */
+    public function getErro()
+    {
+        return $this->erro;
+    }
 
     /**
      * <b>ExeCreate:</b> Executa um cadastro simplificado no banco de dados utilizando prepared statements.
@@ -86,7 +95,7 @@ class Create extends Conn
             $this->result = $this->conn->lastInsertId();
         } catch (\PDOException $e) {
             $this->result = null;
-            parent::error("<b>Erro ao cadastrar: ({$this->tabela})</b> {$e->getMessage()}", $e->getCode());
+            $this->erro = "<b>Erro ao cadastrar: ({$this->tabela})</b> {$e->getMessage()}";
         }
     }
 }

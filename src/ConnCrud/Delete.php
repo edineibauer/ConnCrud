@@ -15,12 +15,21 @@ class Delete extends Conn
     private $termos;
     private $places;
     private $result;
+    private $erro;
 
     /** @var PDOStatement */
     private $delete;
 
     /** @var PDO */
     private $conn;
+
+    /**
+     * @return mixed
+     */
+    public function getErro()
+    {
+        return $this->erro;
+    }
 
     public function exeDelete($tabela, $termos, $parseString)
     {
@@ -86,7 +95,7 @@ class Delete extends Conn
             $this->result = true;
         } catch (\PDOException $e) {
             $this->result = null;
-            parent::error("<b>Erro ao Deletar:</b> {$e->getMessage()}", $e->getCode());
+            $this->erro = "<b>Erro ao Deletar:</b> {$e->getMessage()}";
         }
     }
 }

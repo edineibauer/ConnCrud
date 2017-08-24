@@ -14,12 +14,21 @@ class SqlCommand extends Conn
     private $places;
     private $result;
     private $tabela;
+    private $erro;
 
     /** @var PDOStatement */
     private $command;
 
     /** @var PDO */
     private $conn;
+
+    /**
+     * @return mixed
+     */
+    public function getErro()
+    {
+        return $this->erro;
+    }
 
     /**
      * <b>Obter resultado:</b> Retorna um array com todos os resultados obtidos. Envelope primário númérico. Para obter
@@ -94,7 +103,7 @@ class SqlCommand extends Conn
 
         } catch (\PDOException $e) {
             $this->result = "<b>Erro ao Executar Comando: </b> {$e->getMessage()}";
-            parent::error("<b>Erro ao Executar Comando</b> {$e->getMessage()}", $e->getCode());
+            $this->erro = "<b>Erro ao Executar Comando</b> {$e->getMessage()}";
         }
     }
 }

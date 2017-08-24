@@ -15,12 +15,21 @@ class Read extends Conn
     private $places;
     private $result;
     private $tabela;
+    private $erro;
 
     /** @var PDOStatement */
     private $read;
 
     /** @var PDO */
     private $conn;
+
+    /**
+     * @return mixed
+     */
+    public function getErro()
+    {
+        return $this->erro;
+    }
 
     /**
      * <b>Exe Read:</b> Executa uma leitura simplificada com Prepared Statments. Basta informar o nome da tabela,
@@ -118,7 +127,7 @@ class Read extends Conn
 
         } catch (\PDOException $e) {
             $this->result = null;
-            parent::error("<b>Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}", $e->getCode());
+            $this->erro = "<b>Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}";
         }
     }
 }

@@ -80,7 +80,7 @@ abstract class Conn
         return self::conectar();
     }
 
-    protected static function error($ErrMsg, $ErrNo)
+    private static function error($ErrMsg, $ErrNo = null)
     {
         $color = ["blue" => "lightskyblue", "yellow" => "gold", "green" => "steal", "red" => "lightcoral", "orange" => "orange"];
         $background = ($ErrNo == E_USER_NOTICE ? $color["blue"] : ($ErrNo == E_USER_WARNING ? $color['yellow'] : ($ErrNo == E_USER_ERROR ? $color['red'] : $color['orange'])));

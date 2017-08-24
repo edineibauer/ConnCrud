@@ -16,12 +16,21 @@ class Update extends Conn
     private $termos;
     private $places;
     private $result;
+    private $erro;
 
     /** @var PDOStatement */
     private $update;
 
     /** @var PDO */
     private $conn;
+
+    /**
+     * @return mixed
+     */
+    public function getErro()
+    {
+        return $this->erro;
+    }
 
     /**
      * <b>Exe Update:</b> Executa uma atualização simplificada com Prepared Statments. Basta informar o
@@ -116,7 +125,7 @@ class Update extends Conn
             $this->result = true;
         } catch (\PDOException $e) {
             $this->result = null;
-            parent::error("<b>(Update) Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}", $e->getCode());
+            $this->erro = "<b>(Update) Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}";
         }
     }
 }
