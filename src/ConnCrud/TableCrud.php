@@ -26,6 +26,7 @@ class TableCrud
     private $table;
     private $colunas;
     private $_data;
+    private $exist = false;
 
     public function __construct($table)
     {
@@ -51,7 +52,7 @@ class TableCrud
 
     public function exist()
     {
-        return isset($this->_data['id']) && $this->_data['id'] > 0;
+        return $this->exist;
     }
 
     public function getDados()
@@ -105,6 +106,7 @@ class TableCrud
         $read = new Read();
         $read->ExeRead($this->table, "WHERE {$attr} = '" . str_replace("'", "''", $value) . "'");
         if ($read->getResult()):
+            $this->exist = true;
             foreach ($read->getResult()[0] as $key => $value):
                 $this->colunas[] = $key;
                 $this->{$key} = $value;
@@ -131,6 +133,7 @@ class TableCrud
         $read = new Read();
         $read->ExeRead($this->table, "WHERE {$sql}");
         if ($read->getResult()):
+            $this->exist = true;
             foreach ($read->getResult()[0] as $key => $value):
                 $this->colunas[] = $key;
                 $this->{$key} = $value;
