@@ -45,7 +45,7 @@ class Read extends Conn
             parse_str($parseString, $this->places);
         endif;
 
-        $this->select = "SELECT * FROM {$tabela} {$termos}";
+        $this->select = "SELECT * FROM {$this->tabela} {$termos}";
         $this->execute();
     }
 
@@ -88,11 +88,7 @@ class Read extends Conn
 
     private function setTabela($tabela)
     {
-        if (defined('PRE')):
-            $this->tabela = (preg_match('/^' . PRE . '/', $tabela) ? $tabela : PRE . $tabela);
-        else:
-            $this->tabela = $tabela;
-        endif;
+        $this->tabela = (defined('PRE') && !preg_match('/^' . PRE . '/', $tabela) ? PRE . $tabela : $tabela);
     }
 
     //Obtém o PDO e Prepara a query

@@ -91,11 +91,7 @@ class Update extends Conn
 
     private function setTabela($tabela)
     {
-        if (defined('PRE')):
-            $this->tabela = (preg_match('/^' . PRE . '/', $tabela) ? $tabela : PRE . $tabela);
-        else:
-            $this->tabela = $tabela;
-        endif;
+        $this->tabela = (defined('PRE') && !preg_match('/^' . PRE . '/', $tabela) ? PRE . $tabela : $tabela);
     }
 
     //Obtém o PDO e Prepara a query
