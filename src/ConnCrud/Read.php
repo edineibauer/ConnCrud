@@ -11,7 +11,8 @@ namespace ConnCrud;
 
 class Read extends Conn
 {
-    private $select;
+    private $sql;
+    private $select = "*";
     private $places;
     private $result;
     private $tabela;
@@ -32,6 +33,21 @@ class Read extends Conn
     }
 
     /**
+     * @param mixed $select
+     */
+    public function setSelect($select)
+    {
+        if(is_array($select)) {
+            $this->select = "";
+            foreach ($select as $item) {
+                $this->select .= (!empty($this->select) ? ", " : "") . $item;
+            }
+        } else {
+            $this->select = $select;
+        }
+    }
+
+    /**
      * <b>Exe Read:</b> Executa uma leitura simplificada com Prepared Statments. Basta informar o nome da tabela,
      * os termos da seleção e uma analize em cadeia (ParseString) para executar.
      * @param STRING $tabela = Nome da tabela
@@ -45,7 +61,7 @@ class Read extends Conn
             parse_str($parseString, $this->places);
         endif;
 
-        $this->select = "SELECT * FROM {$this->tabela} {$termos}";
+        $this->sql = "SELECT {$this->select} FROM {$this->tabela} {$termos}";
         $this->execute();
     }
 
@@ -95,7 +111,7 @@ class Read extends Conn
     private function connect()
     {
         $this->conn = parent::getConn();
-        $this->read = $this->conn->prepare($this->select);
+        $this->read = $this->conn->prepare($this->sql);
         $this->read->setFetchMode(\PDO::FETCH_ASSOC);
     }
 
