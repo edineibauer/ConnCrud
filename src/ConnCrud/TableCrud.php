@@ -103,6 +103,7 @@ class TableCrud
         $attr = $attrTemp;
         unset($attrTemp);
 
+        $this->exist = false;
         $read = new Read();
         $read->ExeRead($this->table, "WHERE {$attr} = '" . str_replace("'", "''", $value) . "'");
         if ($read->getResult()):
@@ -130,6 +131,7 @@ class TableCrud
 
     public function loadSql($sql, $arr = null)
     {
+        $this->exist = false;
         $read = new Read();
         $read->ExeRead($this->table, "WHERE {$sql}");
         if ($read->getResult()):
