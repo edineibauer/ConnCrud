@@ -64,7 +64,7 @@ class Create extends Conn
 
     private function setTabela($tabela)
     {
-        $this->tabela = (defined('PRE') && !preg_match('/^' . PRE . '/', $tabela) ? PRE . $tabela : $tabela);
+        $this->tabela = (defined('PRE') && !preg_match('/^' . PRE . '/', $tabela) && parent::getDatabase() === DATABASE ? PRE . $tabela : $tabela);
     }
 
     //Obtém o PDO e Prepara a query

@@ -54,6 +54,14 @@ abstract class Conn
     }
 
     /**
+     * @return string
+     */
+    protected static function getDatabase() :string
+    {
+        return self::$database;
+    }
+
+    /**
      * Conecta com o banco de dados com o pattern singleton.
      * Retorna um objeto PDO!
      */
@@ -80,7 +88,15 @@ abstract class Conn
         return self::conectar();
     }
 
-    private static function error($ErrMsg, $ErrNo = null)
+    protected static function setDefault()
+    {
+        self::setDatabase(DATABASE ?? null);
+        self::setHost(HOST ?? null);
+        self::setUser(USER ?? null);
+        self::setPass(PASS ?? null);
+    }
+
+    protected static function error($ErrMsg, $ErrNo = null)
     {
         $color = ["blue" => "lightskyblue", "yellow" => "gold", "green" => "steal", "red" => "lightcoral", "orange" => "orange"];
         $background = ($ErrNo == E_USER_NOTICE ? $color["blue"] : ($ErrNo == E_USER_WARNING ? $color['yellow'] : ($ErrNo == E_USER_ERROR ? $color['red'] : $color['orange'])));
