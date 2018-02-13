@@ -105,5 +105,7 @@ class SqlCommand extends Conn
             $this->result = "<b>Erro ao Executar Comando: </b> {$e->getMessage()}";
             $this->erro = "<b>Erro ao Executar Comando</b> {$e->getMessage()}";
         }
+
+        parent::setDefault();
     }
 }

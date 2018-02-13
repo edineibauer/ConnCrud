@@ -93,5 +93,7 @@ class Create extends Conn
             $this->result = null;
             $this->erro = "<b>Erro ao cadastrar: ({$this->tabela})</b> {$e->getMessage()}";
         }
+
+        parent::setDefault();
     }
 }

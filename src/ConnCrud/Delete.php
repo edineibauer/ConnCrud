@@ -93,5 +93,7 @@ class Delete extends Conn
             $this->result = null;
             $this->erro = "<b>Erro ao Deletar:</b> {$e->getMessage()}";
         }
+
+        parent::setDefault();
     }
 }

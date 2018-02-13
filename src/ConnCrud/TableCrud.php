@@ -30,9 +30,8 @@ class TableCrud
 
     public function __construct($table)
     {
-        if (defined('PRE')):
+        if (defined('PRE'))
             $this->table = (preg_match('/^' . PRE . '/', $table) ? $table : PRE . $table);
-        endif;
     }
 
     public function __set($property, $value)

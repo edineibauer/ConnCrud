@@ -141,5 +141,7 @@ class Read extends Conn
             $this->result = null;
             $this->erro = "<b>Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}";
         }
+
+        parent::setDefault();
     }
 }

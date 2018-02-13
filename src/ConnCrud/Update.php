@@ -123,5 +123,7 @@ class Update extends Conn
             $this->result = null;
             $this->erro = "<b>(Update) Erro ao Ler: ({$this->tabela})</b> {$e->getMessage()}";
         }
+
+        parent::setDefault();
     }
 }
