@@ -100,6 +100,7 @@ class SqlCommand extends Conn
         try {
             $this->getSyntax();
             $this->command->execute();
+            $this->result = $this->command->fetchAll();
 
         } catch (\PDOException $e) {
             $this->result = "<b>Erro ao Executar Comando: </b> {$e->getMessage()}";
