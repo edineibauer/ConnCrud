@@ -37,7 +37,7 @@ class TableCrud
     public function __set($property, $value)
     {
         if (is_array($this->getColunas()) && in_array($property, $this->getColunas()))
-            $this->_data[$property] = (preg_match('/\d{0,7}\.\d{0,7}/i', $value) ? (float)$value : ($value == "0" || (is_numeric($value) && !preg_match('/^0\d+/i', $value)) ? (int)$value : (empty($value) ? NULL : (string)$value)));
+            $this->_data[$property] = (is_numeric($value) && preg_match('/^\d{0,7}\.\d{0,7}$/i', $value) ? (float)$value : ($value == "0" || (is_numeric($value) && !preg_match('/^0\d+/i', $value)) ? (int)$value : (empty($value) ? NULL : (string)$value)));
     }
 
     public function __get($property)
