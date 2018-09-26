@@ -1,10 +1,8 @@
 {
   "name": "conn/conn-crud",
-  "description": "Conexão ao banco de  dados para operações CRUD",
+  "description": "Conexão ao banco de  dados Mysql para operações CRUD",
   "type": "library",
   "license": "MIT",
-  "prefer-stable" : true,
-  "minimum-stability": "dev",
   "authors": [
     {
       "name": "Edinei J. Bauer",
@@ -12,7 +10,7 @@
     }
   ],
   "require": {
-    "php": "^7.0"
+    "php": "^7.2"
   },
   "autoload": {
     "psr-0": {
