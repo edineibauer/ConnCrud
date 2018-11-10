@@ -101,7 +101,7 @@ class SqlCommand extends Conn
             $this->getSyntax();
             $this->command->execute();
 
-            if (preg_match('/^SELECT /i', $this->select))
+            if (preg_match('/^(SELECT|SHOW) /i', $this->select))
                 $this->result = $this->command->fetchAll();
 
         } catch (\PDOException $e) {
